@@ -12,6 +12,21 @@ headers = {
   "Authorization": f"token {gh_token}"
 }
 
+def main(event, context):
+  print("______ Delete Versions Untagged ______")
+
+  versions_deleted_ids= check_versions_untagged()
+
+  print( 
+    f'''
+        __________________________________________________
+        |                                                |
+        |   Versions id deleted: {versions_deleted_ids}   |
+        |                                                |
+        __________________________________________________
+    '''
+  )
+
 def list_versions_by_package_name():
   result = requests.get(
     f'https://api.github.com/orgs/{org}/packages/container/{package_name}/versions',
