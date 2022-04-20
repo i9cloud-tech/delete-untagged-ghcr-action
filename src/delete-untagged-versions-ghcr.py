@@ -18,7 +18,17 @@ def list_versions_by_package_name():
     headers=headers
   )
 
-  # return result.json()
-  print( result.json()[1]['metadata']['container']['tags'] )
+  return result.json()
 
-list_versions_by_package_name()
+def check_versions_untagged() :
+  versions = list_versions_by_package_name()
+  untagged_list_id = []
+
+  for version in versions:
+    tags = version['metadata']['container']['tags']
+    
+    if tags == [] :
+      id = version['id'] 
+      untagged_list_id.append( id )
+  
+  return untagged_list_id
