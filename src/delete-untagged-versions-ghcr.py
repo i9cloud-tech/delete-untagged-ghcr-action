@@ -30,5 +30,12 @@ def check_versions_untagged() :
     if tags == [] :
       id = version['id'] 
       untagged_list_id.append( id )
+      delete_versions_untagged( id )
   
   return untagged_list_id
+
+def delete_versions_untagged( id ) :
+  requests.delete(
+    f'https://api.github.com/orgs/{org}/packages/container/{package_name}/versions/{id}',
+    headers=headers
+  )
