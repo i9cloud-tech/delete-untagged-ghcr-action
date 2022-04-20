@@ -1,0 +1,34 @@
+name: 'Delete Untagged Versions of GHCR Packages'
+description: 'Delete untagged versions of GHCR Packages'
+author: 'Suélen Lima<>'
+inputs:
+  gh-token:
+    description: 'token connect Github'
+    require: true
+  package-name:
+    description: 'the name of the package'
+    require: true
+  org:
+    description: 'organization'
+    require: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: make sure that python is installed
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: install dependencies
+      shell: bash
+      run: |
+        pip install -r ${{ github.action_path }}/src/required.txt
+    
+    - name: send message to Slack
+      shell: bash
+      run: |
+        export GH_TOKEN=${{ inputs.gh-token }}
+        export PACKAGE_NAME=${{ inputs.package-name }}
+        export ORG=${{ inputs.org }}
+        python ${{ github.action_path }}/src/delete-untagged-versions-ghcr.py
