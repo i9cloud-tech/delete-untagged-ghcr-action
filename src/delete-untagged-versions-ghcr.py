@@ -15,7 +15,7 @@ headers = {
 def main(event, context):
   print("______ Delete Versions Untagged ______")
 
-  versions_deleted_ids= check_versions_untagged()
+  versions_deleted_ids = check_versions_untagged()
 
   print( 
     f'''
@@ -54,3 +54,5 @@ def delete_versions_untagged( id ) :
     f'https://api.github.com/orgs/{org}/packages/container/{package_name}/versions/{id}',
     headers=headers
   )
+
+main()
