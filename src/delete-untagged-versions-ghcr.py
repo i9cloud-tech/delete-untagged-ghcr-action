@@ -12,7 +12,7 @@ headers = {
   "Authorization": f"token {gh_token}"
 }
 
-def main(event, context):
+def main():
   print("______ Delete Versions Untagged ______")
 
   versions_deleted_ids = check_versions_untagged()
