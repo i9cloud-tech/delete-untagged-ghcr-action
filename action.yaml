@@ -15,11 +15,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: make sure that python is installed
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
     - name: install dependencies
       shell: bash
       run: |
